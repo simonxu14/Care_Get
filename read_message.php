@@ -5,7 +5,6 @@
  * Date: 5/25/2016
  * Time: 11:51 AM
  */
-
 //***********************************************************************
 //***********************************************************************
 //******  this code is to tell server user read the a new message  ******
@@ -41,12 +40,12 @@ if( $_GET["message_id"] || $_GET["user_id"]) {
 //****************************************************
 $message_id = $_GET["message_id"];
 $user_id = $_GET["user_id"];
-$created_at = date("Y-m-d h:i:sa");
-$created_by = $_GET['created_by'];
-$updated_at = date("Y-m-d h:i:sa");
-$updated_by = $_GET['created_by'];
+$is_originator = null;
+$last_viewed = date("Y-m-d H:i:sa");
+$updated_at = date("Y-m-d H:i:sa");
+$updated_by = $user_id;
 
-$sql = "INSERT INTO message (title, created_at, created_by, updated_at, updated_by) VALUES ('$title', '$created_at', '$created_by', '$created_at', '$created_by')";
+$sql = "UPDATE user_message SET last_viewed='$last_viewed', updated_at='$updated_at', updated_by='$updated_by' WHERE message_id='$message_id' and user_id='$user_id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
@@ -54,6 +53,5 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-//the auto generated message_id
-$message_id = mysqli_insert_id($conn);
-echo $message_id;
+//finish all the work and close the connection
+$conn->close();

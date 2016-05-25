@@ -45,9 +45,9 @@ if( $_GET["title"] || $_GET["created_by"] || $_GET["send_to"] || $_GET["file_id"
 //*** add a new message into the table message ***
 //************************************************
 $title = $_GET["title"];
-$created_at = date("Y-m-d h:i:sa");
+$created_at = date("Y-m-d H:i:sa");
 $created_by = $_GET['created_by'];
-$updated_at = date("Y-m-d h:i:sa");
+$updated_at = date("Y-m-d H:i:sa");
 $updated_by = $_GET['created_by'];
 
 $sql = "INSERT INTO message (title, created_at, created_by, updated_at, updated_by) VALUES ('$title', '$created_at', '$created_by', '$created_at', '$created_by')";
@@ -69,9 +69,9 @@ echo $message_id;
 //add item into table for the message originator
 $user_id = $created_by;
 $is_originator = 1;
-$created_at = date("Y-m-d h:i:sa");
-$updated_at = date("Y-m-d h:i:sa");
-$last_viewed = date("Y-m-d h:i:sa");
+$created_at = date("Y-m-d H:i:sa");
+$updated_at = date("Y-m-d H:i:sa");
+$last_viewed = date("Y-m-d H:i:sa");
 $sql = "INSERT INTO user_message (message_id, user_id, is_originator, last_viewed, created_at, created_by, updated_at, updated_by) VALUES ('$message_id', '$user_id', '$is_originator', '$last_viewed', '$created_at', '$created_by', '$created_at', '$created_by')";
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
@@ -88,8 +88,8 @@ for($index=0; $index<count($send_array); $index++){
     $user_id = $send_array[$index];
     $is_originator = null;
     $last_viewed = null;
-    $created_at = date("Y-m-d h:i:sa");
-    $updated_at = date("Y-m-d h:i:sa");
+    $created_at = date("Y-m-d H:i:sa");
+    $updated_at = date("Y-m-d H:i:sa");
     $sql = "INSERT INTO user_message (message_id, user_id, created_at, created_by, updated_at, updated_by) VALUES ('$message_id', '$user_id', '$created_at', '$created_by', '$created_at', '$created_by')";
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
@@ -105,8 +105,8 @@ for($index=0; $index<count($send_array); $index++){
 $user_id = $created_by;
 $file_id = null;
 $content = $_GET['content'];
-$created_at = date("Y-m-d h:i:sa");
-$created_at = date("Y-m-d h:i:sa");
+$created_at = date("Y-m-d H:i:sa");
+$created_at = date("Y-m-d H:i:sa");
 
 $sql = "INSERT INTO message_entry (message_id, user_id, content, created_at, created_by, updated_at, updated_by) VALUES ('$message_id', '$user_id', '$content', '$created_at', '$created_by', '$created_at', '$updated_by')";
 if ($conn->query($sql) === TRUE) {
